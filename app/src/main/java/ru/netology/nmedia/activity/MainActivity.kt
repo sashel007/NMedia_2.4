@@ -3,6 +3,7 @@ package ru.netology.nmedia.activity
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
+import androidx.recyclerview.widget.LinearLayoutManager
 import ru.netology.nmedia.databinding.ActivityMainBinding
 import ru.netology.nmedia.recyclerview.PostAdapter
 import ru.netology.nmedia.viewmodel.PostViewModel
@@ -24,6 +25,7 @@ class MainActivity : AppCompatActivity() {
                 viewModel.share(post.id)
             }
         )
+        binding.postList?.layoutManager = LinearLayoutManager(this)
         binding.postList?.adapter = adapter
         viewModel.data.observe(this) { posts ->
             adapter.submitList(posts)
