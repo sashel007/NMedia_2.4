@@ -20,7 +20,54 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:barrierDirection="top"
-        app:constraint_referenced_ids="editText, saveButton"/>
+        app:constraint_referenced_ids="editText, saveButton, editImg, editMessage, cancelButton"/>
+
+    <ImageView
+        android:id="@+id/editImg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/edit_img"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/editText"
+        app:layout_constraintTop_toBottomOf="@id/barrierTop"
+        android:padding="@dimen/common_spacing"/>
+
+    <TextView
+        android:id="@+id/editMessage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/edit_message_text"
+        app:layout_constraintTop_toBottomOf="@id/barrierTop"
+        app:layout_constraintStart_toEndOf="@id/editImg"
+        app:layout_constraintBottom_toTopOf="@id/postText"
+        android:textStyle="bold"
+        android:textColor="@color/project_blue"/>
+
+    <TextView
+        android:id="@+id/postText"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:text="@string/edited_text"
+        app:layout_constraintStart_toEndOf="@id/editImg"
+        app:layout_constraintBottom_toTopOf="@id/editText"
+        app:layout_constraintTop_toBottomOf="@id/editMessage"/>
+
+    <ImageButton
+        android:id="@+id/cancelButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/cancel_img"
+        android:background="@android:color/transparent"
+        android:padding="@dimen/common_spacing"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/editText"
+        app:layout_constraintTop_toBottomOf="@id/barrierTop"/>
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/editCancelGroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="editImg,editMessage,postText,cancelButton"/>
 
     <EditText
         android:id="@+id/editText"

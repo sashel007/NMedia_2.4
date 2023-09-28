@@ -15,4 +15,6 @@
     <string name="add_button_content_description">Добавьте свой пост</string>
     <string name="error_is_empty">Невозможно добавить пустой текст</string>
     <string name="menu_edit">Изменить</string>
+    <string name="edit_message_text">Отредактируйте текст</string>
+    <string name="edited_text">Example</string>
 </resources>
