@@ -1,5 +1,6 @@
 package ru.netology.nmedia.recyclerview
 
+import android.widget.PopupMenu
 import androidx.recyclerview.widget.RecyclerView
 import ru.netology.nmedia.R
 import ru.netology.nmedia.activity.formatAmount
@@ -8,8 +9,7 @@ import ru.netology.nmedia.dto.Post
 
 class PostViewHolder(
     private val binding: PostCardBinding,
-    private val onLikeListener: OnLikeListener,
-    private val onShareListener: OnShareListener
+    private val onInteractionListener: OnInteractionListener
 ) : RecyclerView.ViewHolder(binding.root) {
     fun bind(post: Post) {
         binding.apply {
@@ -20,11 +20,31 @@ class PostViewHolder(
                 if (post.likedByMe) R.drawable.liked_icon else R.drawable.like_icon
             )
             likeIcon.setOnClickListener {
-                onLikeListener(post)
+                onInteractionListener.like(post)
+            }
+            sharingIcon.setOnClickListener {
+                onInteractionListener.share(post)
             }
             likeNumber.text = formatAmount(post.likes)
             sharingsNumber.text = formatAmount(post.sharings)
-
+            menu.setOnClickListener {
+                PopupMenu(it.context, it).apply {
+                    inflate(R.menu.menu_options)
+                    setOnMenuItemClickListener { item ->
+                        when (item.itemId) {
+                            R.id.remove -> {
+                                onInteractionListener.remove(post)
+                                true
+                            }
+                            R.id.edit -> {
+                                onInteractionListener.edit(post)
+                                true
+                            }
+                            else -> false
+                        }
+                    }
+                }.show()
+            }
         }
     }
 }
