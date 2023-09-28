@@ -2,6 +2,7 @@ package ru.netology.nmedia.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -33,22 +34,10 @@ class MainActivity : AppCompatActivity() {
             override fun edit(post: Post) {
                 viewModel.edit(post)
             }
-
             override fun share(post: Post) {
                 viewModel.share(post.id)
             }
         })
-//        val adapter = PostAdapter(
-//            onLikeListener = { post ->
-//                viewModel.like(post.id)
-//            },
-//            onShareListener = { post ->
-//                viewModel.share(post.id)
-//            },
-//            onRemoveListener = { post ->
-//                viewModel.removeById(post.id)
-//            }
-//        )
         binding.postList?.layoutManager = LinearLayoutManager(this)
         binding.postList?.adapter = adapter
         viewModel.data.observe(this) { posts ->
@@ -58,10 +47,21 @@ class MainActivity : AppCompatActivity() {
             }
         }
         viewModel.edited.observe(this) {
-            if (it.id != 0L) {
+            val contentText = it.content
+            if (it.id == 0L) {
+                binding.editCancelGroup?.visibility = View.GONE
+                binding.editCancelGroup?.visibility = View.INVISIBLE
+            } else {
                 binding.editText?.setText(it.content)
                 binding.editText?.focusAndShowKeyboard()
+                binding.editCancelGroup?.visibility = View.VISIBLE
+                binding.postText?.text = truncateText(contentText,35)
             }
+        }
+        binding.cancelButton?.setOnClickListener {
+            binding.editCancelGroup?.visibility = View.GONE
+            binding.editCancelGroup?.visibility = View.INVISIBLE
+            binding.editText?.setText("")
         }
         binding.saveButton?.setOnClickListener {
             val text = binding.editText?.text.toString()
@@ -75,6 +75,7 @@ class MainActivity : AppCompatActivity() {
             binding.editText?.clearFocus()
             AndroidUtils.hideKeyboard(it)
         }
+
     }
 
 }

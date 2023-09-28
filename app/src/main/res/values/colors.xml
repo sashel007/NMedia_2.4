@@ -4,4 +4,5 @@
     <color name="white">#FFFFFFFF</color>
     <color name="icon_colors">#808080</color>
     <color name="project_blue">#3650C5</color>
+    <color name="edit_zone">#FFFDE0</color>
 </resources>
