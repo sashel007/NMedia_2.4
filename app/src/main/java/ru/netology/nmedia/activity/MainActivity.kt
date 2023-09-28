@@ -62,6 +62,9 @@ class MainActivity : AppCompatActivity() {
             binding.editCancelGroup?.visibility = View.GONE
             binding.editCancelGroup?.visibility = View.INVISIBLE
             binding.editText?.setText("")
+//            binding.editText?.clearFocus()
+//            AndroidUtils.hideKeyboard(it)
+            viewModel.resetEditingState()
         }
         binding.saveButton?.setOnClickListener {
             val text = binding.editText?.text.toString()
