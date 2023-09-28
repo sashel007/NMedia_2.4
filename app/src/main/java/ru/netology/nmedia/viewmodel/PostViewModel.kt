@@ -45,4 +45,8 @@ class PostViewModel : ViewModel() {
     fun edit(post: Post) {
         edited.value = post
     }
+
+    fun resetEditingState() {
+        edited.value = empty
+    }
 }
